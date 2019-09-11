@@ -8,7 +8,7 @@ services:
       - 27017:27017
     volumes:
       - ./mongo/init/:/docker-entrypoint-initdb.d/
-      - ./mongo/db:/data/db
+      - /var/opt/mongodb:/data/db
     environment:
       MONGO_INITDB_DATABASE: user
     # logging:
