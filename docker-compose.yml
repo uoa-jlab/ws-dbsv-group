@@ -57,7 +57,7 @@ services:
       driver: journald
   # for test
   tes_dbsv:
-    container_name: har_dbsv
+    container_name: tes_dbsv
     image: 0eta0/dbsv:latest
     links:
       - dbsv_mongo
