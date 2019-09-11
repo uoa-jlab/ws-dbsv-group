@@ -11,8 +11,8 @@ services:
       - /var/opt/mongodb:/data/db
     environment:
       MONGO_INITDB_DATABASE: user
-    # logging:
-    #   driver: journald
+    logging:
+      driver: journald
   # for mitsubishi
   m_dbsv:
     container_name: m_dbsv
@@ -25,8 +25,8 @@ services:
       HOST_ADDRESS: swcn20.u-aizu.ac.jp
       DBS_SYSTEM_TYPE: mit
       MDB_MONGO_HOST: dbsv_mongo
-    # logging:
-    #   driver: journald
+    logging:
+      driver: journald
   # for handwriting
   hw_dbsv:
     container_name: hw_dbsv
@@ -39,8 +39,8 @@ services:
       HOST_ADDRESS: swcn20.u-aizu.ac.jp
       DBS_SYSTEM_TYPE: hw
       MDB_MONGO_HOST: dbsv_mongo
-    # logging:
-    #   driver: journald
+    logging:
+      driver: journald
   # for human activity recognition
   har_dbsv:
     container_name: har_dbsv
@@ -53,8 +53,23 @@ services:
       HOST_ADDRESS: swcn20.u-aizu.ac.jp
       DBS_SYSTEM_TYPE: har
       MDB_MONGO_HOST: dbsv_mongo
-    # logging:
-    #   driver: journald
+    logging:
+      driver: journald
+  # for test
+  tes_dbsv:
+    container_name: har_dbsv
+    image: 0eta0/dbsv:latest
+    links:
+      - dbsv_mongo
+    depends_on:
+      - dbsv_mongo
+    environment:
+      HOST_ADDRESS: swcn20.u-aizu.ac.jp
+      DBS_SYSTEM_TYPE: tes
+      MDB_MONGO_HOST: dbsv_mongo
+    logging:
+      driver: journald
+  # nginx
   dbsv_nginx:
     container_name: dbsv_nginx
     build:
@@ -68,9 +83,11 @@ services:
       - m_dbsv
       - hw_dbsv
       - har_dbsv
+      - tes_dbsv
     depends_on:
       - m_dbsv
       - hw_dbsv
       - har_dbsv
-    # logging:
-    #   driver: journald
+      - tes_dbsv
+    logging:
+      driver: journald
