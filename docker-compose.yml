@@ -25,6 +25,7 @@ services:
       HOST_ADDRESS: swcn20.u-aizu.ac.jp
       DBS_SYSTEM_TYPE: mit
       MDB_MONGO_HOST: dbsv_mongo
+      UWSGI_PROCESSES: 2
     logging:
       driver: journald
   # for handwriting
@@ -39,6 +40,7 @@ services:
       HOST_ADDRESS: swcn20.u-aizu.ac.jp
       DBS_SYSTEM_TYPE: hw
       MDB_MONGO_HOST: dbsv_mongo
+      UWSGI_PROCESSES: 1
     logging:
       driver: journald
   # for human activity recognition
@@ -53,6 +55,7 @@ services:
       HOST_ADDRESS: swcn20.u-aizu.ac.jp
       DBS_SYSTEM_TYPE: har
       MDB_MONGO_HOST: dbsv_mongo
+      UWSGI_PROCESSES: 1
     logging:
       driver: journald
   # for test
@@ -67,6 +70,7 @@ services:
       HOST_ADDRESS: swcn20.u-aizu.ac.jp
       DBS_SYSTEM_TYPE: tes
       MDB_MONGO_HOST: dbsv_mongo
+      UWSGI_PROCESSES: 1
     logging:
       driver: journald
   # nginx
