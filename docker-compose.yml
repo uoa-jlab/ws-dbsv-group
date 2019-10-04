@@ -14,8 +14,8 @@ services:
     logging:
       driver: journald
   # for mitsubishi
-  m_dbsv:
-    container_name: m_dbsv
+  mit_dbsv:
+    container_name: mit_dbsv
     image: 0eta0/dbsv:latest
     links:
       - dbsv_mongo
@@ -84,12 +84,12 @@ services:
     ports:
       - 8910:8910
     links:
-      - m_dbsv
+      - mit_dbsv
       - hw_dbsv
       - har_dbsv
       - tes_dbsv
     depends_on:
-      - m_dbsv
+      - mit_dbsv
       - hw_dbsv
       - har_dbsv
       - tes_dbsv
