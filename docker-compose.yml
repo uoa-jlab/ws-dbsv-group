@@ -28,6 +28,21 @@ services:
       UWSGI_PROCESSES: 2
     logging:
       driver: journald
+  # for glove
+  glo_dbsv:
+    container_name: glo_dbsv
+    image: 0eta0/dbsv:latest
+    links:
+      - dbsv_mongo
+    depends_on:
+      - dbsv_mongo
+    environment:
+      HOST_ADDRESS: swcn20.u-aizu.ac.jp
+      DBS_SYSTEM_TYPE: glo
+      MDB_MONGO_HOST: dbsv_mongo
+      UWSGI_PROCESSES: 1
+    logging:
+      driver: journald
   # for handwriting
   hw_dbsv:
     container_name: hw_dbsv
@@ -86,10 +101,12 @@ services:
     links:
       - mit_dbsv
       - hw_dbsv
+      - glo_dbsv
       - har_dbsv
       - tes_dbsv
     depends_on:
       - mit_dbsv
+      - glo_dbsv
       - hw_dbsv
       - har_dbsv
       - tes_dbsv
